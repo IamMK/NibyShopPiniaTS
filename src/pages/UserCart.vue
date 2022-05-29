@@ -19,7 +19,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import CartItem from "../components/cart/CartItem.vue";
 import { useCartStore } from "../store/cart";
 

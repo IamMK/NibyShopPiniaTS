@@ -14,7 +14,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import ProductItem from "../components/products/ProductItem.vue";
 import { useProdsStore } from "../store/products";
 

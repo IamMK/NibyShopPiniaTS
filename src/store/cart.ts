@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
 import { useProdsStore } from "./products";
 
+export type Product = { productId: string, image: string, title: string, price: number, qty: number }
+
 export const useCartStore = defineStore("cart", {
   state: () => {
     return {
-      products: [],
+      products: [] as Product[],
       total: 0,
       qty: 0,
     };
@@ -13,9 +15,9 @@ export const useCartStore = defineStore("cart", {
     cartTotal: (state) => state.total.toFixed(2),
   },
   actions: {
-    addProductToCart(payload) {
+    addProductToCart(payload: string) {
       const prods = useProdsStore();
-      const productData = prods.products.find((prod) => prod.id === payload.id);
+      const productData = prods.products.find((prod) => prod.id === payload);
       const productInCartIndex = this.products.findIndex(
         (ci) => ci.productId === productData.id
       );

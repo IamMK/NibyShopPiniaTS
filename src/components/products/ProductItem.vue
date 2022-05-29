@@ -18,7 +18,7 @@
   </li>
 </template>
 
-<script>
+<script lang="ts">
 import { useCartStore } from "../../store/cart";
 
 export default {
@@ -26,7 +26,8 @@ export default {
     const cart = useCartStore();
 
     function addToCart() {
-      cart.addProductToCart({ id: props.id });
+      let id: string = props.id;
+      cart.addProductToCart(id);
     }
 
     return { addToCart };

@@ -24,7 +24,7 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
 import { useCartStore } from "../../store/cart";
 import { useMainStore } from "../../store";
 
