@@ -25,18 +25,25 @@
 import { useCartStore } from "../../store/cart";
 
 export default {
-  setup() {
+  setup(props) {
     const cart = useCartStore();
 
     function remove() {
-      cart.removeProductFromCart();
+      cart.removeProductFromCart(props.prodId);
     }
 
     return { remove };
   },
-  props: ["prodId", "title", "image", "price", "qty"],
+  // props: ["prodId", "title", "image", "price", "qty"],
+  props: {
+    prodId: String,
+    title: String,
+    image: String,
+    price: Number,
+    qty: Number,
+  },
   computed: {
-    itemTotal() {
+    itemTotal(): number {
       console.log(this.price * this.qty);
       return (this.price * this.qty).toFixed(2);
     },

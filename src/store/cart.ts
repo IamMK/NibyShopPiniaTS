@@ -1,7 +1,13 @@
 import { defineStore } from "pinia";
 import { useProdsStore } from "./products";
 
-export type Product = { productId: string, image: string, title: string, price: number, qty: number }
+export type Product = {
+  productId: string;
+  image: string;
+  title: string;
+  price: number;
+  qty: number;
+};
 
 export const useCartStore = defineStore("cart", {
   state: () => {
@@ -18,6 +24,7 @@ export const useCartStore = defineStore("cart", {
     addProductToCart(payload: string) {
       const prods = useProdsStore();
       const productData = prods.products.find((prod) => prod.id === payload);
+      if (productData == null) throw Error("Fuck u");
       const productInCartIndex = this.products.findIndex(
         (ci) => ci.productId === productData.id
       );
@@ -38,13 +45,13 @@ export const useCartStore = defineStore("cart", {
       this.total += productData.price;
     },
 
-    removeProductFromCart(payload) {
-      const prodId = payload.productId;
+    removeProductFromCart(payload: string) {
+      const prodId = payload;
       const productInCartIndex = this.products.findIndex(
         (cartItem) => cartItem.productId === prodId
       );
       const prodData = this.products[productInCartIndex];
-      this.items.splice(productInCartIndex, 1);
+      this.products.splice(productInCartIndex, 1);
       this.qty -= prodData.qty;
       this.total -= prodData.price * prodData.qty;
     },
